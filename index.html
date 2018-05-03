@@ -59,7 +59,7 @@ var session;
 window.enableAdapter = true; // enable adapter.js
 document.querySelector('#shareScreen').onclick =  function() {
  
-  connection.open('#justen', function() {
+  connection.open('#justen', true , function() {
     showRoomURL(connection.sessionid);
   });
   
@@ -87,7 +87,7 @@ document.getElementById('join-room').onclick = function() {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
   };
-  connection.join(connection.sessionid);
+  connection.join('#justen');
 };
                 
         </script>
