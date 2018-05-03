@@ -1,19 +1,27 @@
 <!DOCTYPE html>
+
 <html>
+  
   <head>
-    <div></div>
+    <div class="wrapper">
       <link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+      <link rel="stylesheet" href="main.css">
       <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-      <h1>Justen's Shitty Site</h1>
+      <script src="https://cdn.webrtc-experiment.com/Screen-Capturing.js"> </script>
+      <div class="container">
+      <h1 style="color:aquamarine; font: bold">Justen's Shitty Site</h1>
+      </div>
     </head>
 
-      <body bgcolor="#A9A9A9" background="bleach.jpg">
+      <body bgcolor="#A9A9A9" background="background.jpg">
+      <style>* { margin:0px auto; }
+          div.container { width:1000px; border:1px solid black; }
+        </style>
 
 
         <!-- Video   -->
-        <video id="my-video" class="video-js" controls preload="auto" width="720" height="480" 
+        <video id="my-video" class="video-js" controls preload="auto" width="1280" height="720" 
         data-setup="{}">
-          <source src="test.mp4" type="video/mp4">
           <p class="vjs-no-js">
             <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
           </p>
@@ -28,13 +36,17 @@
         <script src="https://cdn.webrtc-experiment.com/syntax/sh_javascript.min.js" type="text/javascript"> </script>
         <link href="https://cdn.webrtc-experiment.com/syntax/sh_style.css" type="text/css" rel="stylesheet">
 
+     <div id="wrapper">
         <ol>
           <li>
-            <button id="shareScreen">Share Screen</button> 
+            <button id="shareScreen" >
+              <img src="bleach.jpg">
+            </button> 
           </li>
         </ol>
+    </div>
         <script>
-                document.querySelector('#shareScreen').onclick =  function() {
+            document.querySelector('#shareScreen').onclick =  function() {
                     this.disabled=true;
                     getScreenConstraints(function(error, screen_constraints) {
                         if(error) {
@@ -44,7 +56,7 @@
                         console.log('screen_constraints', screen_constraints);
                         
                         navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                        navigator.getUserMedia({ video: screen_constraints }, function(stream) {
+                        navigator.getUserMedia({ video: screen_constraints, audio: true }, function(stream) {
                             var video = document.querySelector('video');
                             video.src = URL.createObjectURL(stream);
                             video.play();
@@ -54,5 +66,8 @@
                     });
                 };
         </script>
+
+
       </body>
+    </div>
 </html>
