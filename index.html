@@ -55,6 +55,7 @@
     </div>
         <script>
 var connection = new RTCMultiConnection();
+var session;
 window.enableAdapter = true; // enable adapter.js
 document.querySelector('#shareScreen').onclick =  function() {
  
@@ -79,14 +80,14 @@ document.querySelector('#shareScreen').onclick =  function() {
       alert(JSON.stringify(error, null, '\t'));
     });
   });
-  console.log('room opened');  
+  console.log(connection.sessionid);  
 };
 document.getElementById('join-room').onclick = function() {
   connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
   };
-  connection.join('#justen');
+  connection.join(connection.sessionid);
 };
                 
         </script>
