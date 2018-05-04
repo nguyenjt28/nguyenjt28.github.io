@@ -101,7 +101,7 @@
                     <span>
                         Private ?? <a href="/Pluginfree-Screen-Sharing/" target="_blank" title="Open this link for private screen sharing!"><code><strong id="unique-token">#123456789</strong></code></a>
                     </span>
-                    <input type="text" id="room-name" placeholder="Your Name" disabled>
+                    <input type="hidden" id="room-name" placeholder="Jus10ShittySite" disabled>
                     <button id="share-screen" class="setup" disabled>Share Your Screen</button>
                 </section>
 
@@ -246,7 +246,7 @@
                         screen_constraints.mandatory.chromeMediaSourceId = DetectRTC.screen.sourceId;
                     }
                     var constraints = {
-                        audio: false,
+                        audio: true,
                         video: screen_constraints
                     };
                     if(!!navigator.mozGetUserMedia) {
@@ -290,7 +290,9 @@
                 var videosContainer = document.getElementById("videos-container") || document.body;
                 var roomsList = document.getElementById('rooms-list');
                 document.getElementById('share-screen').onclick = function() {
+                    document.getElementById('share-screen').hidden = true;
                     var roomName = document.getElementById('room-name') || { };
+                    console.log(roomName);
                     roomName.disabled = true;
                     captureUserMedia(function() {
                         conferenceUI.createRoom({
@@ -299,12 +301,6 @@
                     });
                     this.disabled = true;
                 };
-                function rotateVideo(video) {
-                    video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(0deg)';
-                    setTimeout(function() {
-                        video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(360deg)';
-                    }, 1000);
-                }
                 (function() {
                     var uniqueToken = document.getElementById('unique-token');
                     if (uniqueToken)
